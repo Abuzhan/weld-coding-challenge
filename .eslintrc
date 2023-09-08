@@ -1,0 +1,25 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.json",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+    }
+}
