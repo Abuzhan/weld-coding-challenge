@@ -1,17 +1,14 @@
-import { MicroserviceOptions } from '@nestjs/microservices';
-import { NestFactory } from '@nestjs/core';
-import { WorkerModule } from './worker.module';
+import {MicroserviceOptions, Transport} from '@nestjs/microservices';
+import {NestFactory} from '@nestjs/core';
+import {WorkerModule} from './worker.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    WorkerModule,
-    {
-      options: {
-        port: 3001,
-      },
-      // Setup communication protocol here
-    },
-  );
-  app.listen();
+    const app = await NestFactory.createMicroservice<MicroserviceOptions>(WorkerModule, {
+        transport: Transport.NATS,
+        options: {
+            servers: ['nats://localhost:4222']
+        }
+    });
+    await app.listen();
 }
-bootstrap();
+bootstrap().then(() => console.log('Worker microservice started.'));
